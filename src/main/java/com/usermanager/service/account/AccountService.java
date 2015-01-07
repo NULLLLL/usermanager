@@ -19,7 +19,6 @@ import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;
 
 import com.usermanager.entity.User;
-import com.usermanager.repository.TaskDao;
 import com.usermanager.repository.UserDao;
 import com.usermanager.service.ServiceException;
 import com.usermanager.service.account.ShiroDbRealm.ShiroUser;
@@ -41,7 +40,6 @@ public class AccountService {
 	private static Logger logger = LoggerFactory.getLogger(AccountService.class);
 
 	private UserDao userDao;
-	private TaskDao taskDao;
 	private Clock clock = Clock.DEFAULT;
 
 	public List<User> getAllUser() {
@@ -77,7 +75,6 @@ public class AccountService {
 			throw new ServiceException("不能删除超级管理员用户");
 		}
 		userDao.delete(id);
-		taskDao.deleteByUserId(id);
 
 	}
 
@@ -110,11 +107,6 @@ public class AccountService {
 	@Autowired
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
-	}
-
-	@Autowired
-	public void setTaskDao(TaskDao taskDao) {
-		this.taskDao = taskDao;
 	}
 
 	public void setClock(Clock clock) {

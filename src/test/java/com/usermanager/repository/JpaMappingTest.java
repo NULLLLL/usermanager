@@ -1,11 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2005, 2014 springside.github.io
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- *******************************************************************************/
 package com.usermanager.repository;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.junit.Assert.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,26 +10,35 @@ import javax.persistence.metamodel.Metamodel;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.test.context.ContextConfiguration;
-import org.springside.modules.test.spring.SpringTransactionalTestCase;
 
-@ContextConfiguration(locations = { "/applicationContext.xml" })
-public class JpaMappingTest extends SpringTransactionalTestCase {
+import com.usermanager.BaseTest;
+
+public class JpaMappingTest extends BaseTest {
 
 	private static Logger logger = LoggerFactory.getLogger(JpaMappingTest.class);
 
 	@PersistenceContext
 	private EntityManager em;
 
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void allClassMapping() throws Exception {
 		Metamodel model = em.getEntityManagerFactory().getMetamodel();
-		assertThat(model.getEntities()).as("No entity mapping found").isNotEmpty();
+
+		assertTrue("No entity mapping found", model.getEntities().size() > 0);
 
 		for (EntityType entityType : model.getEntities()) {
 			String entityName = entityType.getName();
-			em.createQuery("select o from " + entityName + " o").getResultList();
-			logger.info("ok: " + entityName);
+			logger.info(" start: " + entityName);
+			try {
+				em.createQuery("select o from " + entityName + " o").getResultList();
+			} catch (Exception e) {
+				logger.error(e.getMessage() + " entityName is :" + entityName);
+				e.printStackTrace();
+				throw e;
+			}
+			logger.info(" finish: " + entityName);
 		}
+
 	}
 }
