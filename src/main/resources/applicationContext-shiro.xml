@@ -27,6 +27,8 @@
 				/logout = logout
 				/static/** = anon
 				/api/** = anon
+				/kaptcha.jpg/** = anon
+				/login/kaptcha/** = anon
 				/register/** = anon
 				/admin/** = roles[admin]
 				/** = user

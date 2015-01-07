@@ -39,6 +39,7 @@ public class AccountService {
 
 	private static Logger logger = LoggerFactory.getLogger(AccountService.class);
 
+	@Autowired
 	private UserDao userDao;
 	private Clock clock = Clock.DEFAULT;
 
@@ -102,11 +103,6 @@ public class AccountService {
 
 		byte[] hashPassword = Digests.sha1(user.getPlainPassword().getBytes(), salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
-	}
-
-	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
 	}
 
 	public void setClock(Clock clock) {
