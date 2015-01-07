@@ -23,8 +23,6 @@ import javax.persistence.MappedSuperclass;
 public abstract class IdEntity {
 
 	protected Long id;
-
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
