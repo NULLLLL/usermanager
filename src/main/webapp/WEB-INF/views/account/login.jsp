@@ -34,6 +34,15 @@
 				<input type="password" id="password" name="password" class="input-medium required"/>
 			</div>
 		</div>
+		
+		<!-- <div class="control-group">
+			<label for="captchaimg" class="control-label">验证码:</label>
+			<div class="controls">
+				<input type="text" class="input-medium required"/>
+				<img alt="验证码" title="看不清，下一张" src="kaptcha.jpg" id="captchaimg" onclick="nextCaptcha();" style="cursor: pointer;width: 80px;height: 30px;">
+      		<a href="javascript:void(0);" onclick="nextCaptcha();" style="font-size: 12px;color: red;">看不清，下一张</a>
+			</div>
+		</div> -->
 				
 		<div class="control-group">
 			<div class="controls">
@@ -42,9 +51,13 @@
 			 	<span class="help-block">(管理员: <b>admin/admin</b>, 普通用户: <b>user/user</b>)</span>
 			</div>
 		</div>
+		
 	</form>
 
 	<script>
+	function nextCaptcha(){
+		document.getElementById("captchaimg").src="kaptcha.jpg?q="+new Date();
+		}
 		$(document).ready(function() {
 			$("#loginForm").validate();
 		});

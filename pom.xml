@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.springside.examples</groupId>
-	<artifactId>quickstart</artifactId>
+	<groupId>com</groupId>
+	<artifactId>usermanager</artifactId>
 	<version>4.2.2.GA</version>
 	<packaging>war</packaging>
-	<name>Springside :: Example :: QuickStart</name>
+	<name>usermanager</name>
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->

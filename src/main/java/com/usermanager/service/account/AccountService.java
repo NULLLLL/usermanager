@@ -5,8 +5,12 @@
  *******************************************************************************/
 package com.usermanager.service.account;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -41,6 +45,7 @@ public class AccountService {
 
 	@Autowired
 	private UserDao userDao;
+
 	private Clock clock = Clock.DEFAULT;
 
 	public List<User> getAllUser() {
@@ -57,9 +62,7 @@ public class AccountService {
 
 	public void registerUser(User user) {
 		entryptPassword(user);
-		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
-
 		userDao.save(user);
 	}
 
@@ -77,6 +80,22 @@ public class AccountService {
 		}
 		userDao.delete(id);
 
+	}
+
+	public List<Map<String, Object>> getUserList(int pageSize, int pageNo, String order) {
+		List<User> userList = userDao.getUserList(pageSize, pageNo, order);
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		if (CollectionUtils.isNotEmpty(userList)) {
+			for (User user : userList) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", user.getId());
+				map.put("loginName", user.getLoginName());
+				map.put("name", user.getName());
+				map.put("registerDate", user.getRegisterDate().toString());
+				list.add(map);
+			}
+		}
+		return list;
 	}
 
 	/**

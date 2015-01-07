@@ -2,7 +2,6 @@
 <%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator" %>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
 <html>
 <head>
 <title>用户管理<sitemesh:title/></title>
@@ -13,27 +12,25 @@
 
 <link type="image/x-icon" href="${ctx}/static/images/favicon.ico" rel="shortcut icon">
 <link href="${ctx}/static/styles/default.css" type="text/css" rel="stylesheet" />
-<script src="${ctx}/static/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/bootstrap/2.3.2/js/bootstrap.min.js" type="text/javascript"></script>
 <link href="${ctx}/static/bootstrap/2.3.2/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<script src="${ctx}/static/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/jquery-validation/1.11.1/messages_bs_zh.js" type="text/javascript"></script>
 <link href="${ctx}/static/jquery-validation/1.11.1/validate.css" type="text/css" rel="stylesheet" />
 <link href="${ctx}/static/tool/bootstrap-table.css" type="text/css" rel="stylesheet" />
+<script src="${ctx}/static/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/bootstrap/2.3.2/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/jquery-validation/1.11.1/messages_bs_zh.js" type="text/javascript"></script>
 <script src="${ctx}/static/tool/bootstrap-table.js"></script>
 <script src="${ctx}/static/tool/jquery.placeholder.js"></script>
-<script src="${ctx}/dwr/common/util.js" type="text/javascript"></script>
-<script src="${ctx}/dwr/common/engine.js" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/constructor.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/BaseClass.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/class/Sysutil.js?2015.01.05" ></script>
 <script type="text/javascript">
 	var sysutil = New(Sysutil,[]);
 	var context = '${ctx}';
+	var $ = jQuery.noConflict();
 </script>
 <sitemesh:head/>
 </head>
-
 <body>
 	<div class="container">
 		<%@ include file="/WEB-INF/layouts/header.jsp"%>
@@ -42,6 +39,5 @@
 		</div>
 		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 	</div>
-	
 </body>
 </html>

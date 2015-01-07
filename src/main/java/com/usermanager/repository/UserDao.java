@@ -5,10 +5,10 @@
  *******************************************************************************/
 package com.usermanager.repository;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.usermanager.entity.User;
 
-public interface UserDao extends PagingAndSortingRepository<User, Long> {
+public interface UserDao extends CrudRepository<User, Long>, UserDaoCustom {
 	User findByLoginName(String loginName);
 }

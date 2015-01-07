@@ -38,8 +38,8 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		User user = accountService.findUserByLoginName(token.getUsername());
 		if (user != null) {
 			byte[] salt = Encodes.decodeHex(user.getSalt());
-			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getName()),
-					user.getPassword(), ByteSource.Util.bytes(salt), getName());
+			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getName()), user.getPassword(),
+					ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;
 		}
@@ -53,7 +53,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
 		User user = accountService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(user.getRoleList());
 		return info;
 	}
 
@@ -64,7 +63,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	public void initCredentialsMatcher() {
 		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(AccountService.HASH_ALGORITHM);
 		matcher.setHashIterations(AccountService.HASH_INTERATIONS);
-
 		setCredentialsMatcher(matcher);
 	}
 
@@ -84,6 +82,26 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		public ShiroUser(Long id, String loginName, String name) {
 			this.id = id;
 			this.loginName = loginName;
+			this.name = name;
+		}
+
+		public Long getId() {
+			return id;
+		}
+
+		public void setId(Long id) {
+			this.id = id;
+		}
+
+		public String getLoginName() {
+			return loginName;
+		}
+
+		public void setLoginName(String loginName) {
+			this.loginName = loginName;
+		}
+
+		public void setName(String name) {
 			this.name = name;
 		}
 
@@ -131,5 +149,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			}
 			return true;
 		}
+
 	}
 }
