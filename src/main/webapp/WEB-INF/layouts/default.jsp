@@ -24,6 +24,8 @@
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/constructor.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/BaseClass.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/class/Sysutil.js?2015.01.05" ></script>
+<script type='text/javascript' src='${ctx}/dwr/common/engine.js'></script>
+<script type='text/javascript' src='${ctx}/dwr/common/util.js'></script>
 <script type="text/javascript">
 	var sysutil = New(Sysutil,[]);
 	var context = '${ctx}';

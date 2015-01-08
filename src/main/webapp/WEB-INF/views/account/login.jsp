@@ -13,15 +13,18 @@
 <body>
 	<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal">
 	<%
-	String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-	if(error != null){
-	%>
-		<div class="alert alert-error input-medium controls">
-			<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
-		</div>
-	<%
-	}
-	%>
+	if(request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME) != null) {
+		String error = request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME).toString();
+		if(error != null){
+			System.out.print(error);
+			%>
+				<div class="alert alert-error input-medium controls">
+					<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
+				</div>
+			<%
+			}
+		}
+		%>
 		<div class="control-group">
 			<label for="username" class="control-label">名称:</label>
 			<div class="controls">
@@ -35,14 +38,14 @@
 			</div>
 		</div>
 		
-		<!-- <div class="control-group">
+		<div class="control-group">
 			<label for="captchaimg" class="control-label">验证码:</label>
 			<div class="controls">
-				<input type="text" class="input-medium required"/>
+				<input type="text" name="captcha" id="captcha" class="input-medium required"/>
 				<img alt="验证码" title="看不清，下一张" src="kaptcha.jpg" id="captchaimg" onclick="nextCaptcha();" style="cursor: pointer;width: 80px;height: 30px;">
       		<a href="javascript:void(0);" onclick="nextCaptcha();" style="font-size: 12px;color: red;">看不清，下一张</a>
 			</div>
-		</div> -->
+		</div> 
 				
 		<div class="control-group">
 			<div class="controls">

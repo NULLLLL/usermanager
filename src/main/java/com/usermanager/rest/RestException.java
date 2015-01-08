@@ -10,8 +10,8 @@ import org.springframework.http.HttpStatus;
 /**
  * 专用于Restful Service的异常.
  * 
- * @author calvin
  */
+@SuppressWarnings("serial")
 public class RestException extends RuntimeException {
 
 	public HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;

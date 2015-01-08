@@ -16,7 +16,7 @@
 	<table data-toggle="table" data-url="${ctx}/admin/userTable" data-cache="false" data-height="200">
     <thead>
         <tr>
-            <th data-align="center" data-field="id" data-formatter="adminUserList.idformatter"><input type="checkbox"/></th>
+            <th data-align="center" data-field="id" data-formatter="adminUserList.idformatter"></th>
             <th data-align="center" data-sortable="true" data-field="name">姓名</th>
             <th data-align="center" data-sortable="true" data-field="loginName">登录名</th>
             <th data-align="center" data-sortable="true" data-field="registerDate">注册时间</th>
