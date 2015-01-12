@@ -3,6 +3,8 @@ package com.util;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class PathUtil {
 
 	public static String readProjectPath() {
@@ -18,6 +20,10 @@ public class PathUtil {
 
 	public static String readProjectWebRootPath() {
 		return readProjectPath() + File.separator + "src" + File.separator + "main" + File.separator + "webapp";
+	}
+	
+	public static String getPath(HttpServletRequest request) {
+		return request.getSession().getServletContext().getRealPath("/");
 	}
 
 }

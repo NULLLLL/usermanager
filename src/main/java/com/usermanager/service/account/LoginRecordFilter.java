@@ -11,6 +11,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springside.modules.utils.Encodes;
 
 import com.util.DateUtil;
 
@@ -27,6 +28,8 @@ public class LoginRecordFilter extends FormAuthenticationFilter {
 		String username = getUsername(request);
 		String password = getPassword(request);
 		String captcha = getCaptcha(request);
+		username = new String(Encodes.decodeBase64(username));
+		password = new String(Encodes.decodeBase64(password));
 		boolean rememberMe = isRememberMe(request);
 		String host = getHost(request);
 		CaptchaUsernamePasswordToken token = new CaptchaUsernamePasswordToken(username, password != null ? password.toCharArray() : null, rememberMe, host,
