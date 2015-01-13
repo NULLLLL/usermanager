@@ -26,10 +26,8 @@ public class LoginRecordFilter extends FormAuthenticationFilter {
 	@Override
 	protected CaptchaUsernamePasswordToken createToken(ServletRequest request, ServletResponse response) {
 		String username = getUsername(request);
-		String password = getPassword(request);
+		String password = new String(Encodes.decodeBase64(getPassword(request)));
 		String captcha = getCaptcha(request);
-		username = new String(Encodes.decodeBase64(username));
-		password = new String(Encodes.decodeBase64(password));
 		boolean rememberMe = isRememberMe(request);
 		String host = getHost(request);
 		CaptchaUsernamePasswordToken token = new CaptchaUsernamePasswordToken(username, password != null ? password.toCharArray() : null, rememberMe, host,

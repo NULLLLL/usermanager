@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
@@ -16,15 +16,18 @@
 
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
 	<context:component-scan base-package="com.usermanager">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 
 	<!-- Jpa Entity Manager 配置 -->
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
-		<property name="dataSource" ref="dataSource"/>
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
-		<property name="packagesToScan" value="com.usermanager"/>
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		<property name="packagesToScan" value="com.usermanager" />
 		<property name="jpaProperties">
 			<props>
 				<!-- 命名规则 My_NAME->MyName -->
@@ -32,24 +35,29 @@
 			</props>
 		</property>
 	</bean>
-	
-	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+
+	<bean id="hibernateJpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="databasePlatform">
-			<bean factory-method="getDialect" class="org.springside.modules.persistence.Hibernates">
-				<constructor-arg ref="dataSource"/>
+			<bean factory-method="getDialect"
+				class="org.springside.modules.persistence.Hibernates">
+				<constructor-arg ref="dataSource" />
 			</bean>
 		</property>
 	</bean>
 
 	<!-- Spring Data Jpa配置 -->
- 	<jpa:repositories base-package="com.usermanager"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
-   
+	<jpa:repositories base-package="com.usermanager"
+		transaction-manager-ref="transactionManager"
+		entity-manager-factory-ref="entityManagerFactory" />
+
 	<!-- Jpa 事务配置 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<context:property-placeholder ignore-unresolvable="true" location="classpath*:kcaptcha.properties" />	
+	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath*:kcaptcha.properties" />
 	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
 		<property name="config">
 			<bean class="com.google.code.kaptcha.util.Config">
@@ -68,25 +76,28 @@
 						<prop key="kaptcha.textproducer.char.string">${kaptcha.textproducer.char.string}</prop>
 						<prop key="kaptcha.background.clear.to">${kaptcha.background.clear.to}</prop>
 						<prop key="kaptcha.background.clear.from">${kaptcha.background.clear.from}</prop>
-						
+
 					</props>
 				</constructor-arg>
 			</bean>
 		</property>
 	</bean>
-	
+
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
 
 	<!-- JSR303 Validator定义 -->
- 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-	
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
 	<!-- production环境 -->
- 	<beans profile="production">
- 		<context:property-placeholder ignore-unresolvable="true"
-			location="classpath*:/application.properties" />	
+	<beans profile="production">
+		<context:property-placeholder
+			ignore-unresolvable="true" location="classpath*:/application.properties" />
 		<!-- 数据源配置, 使用Tomcat JDBC连接池 -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+			destroy-method="close">
 			<!-- Connection Info -->
 			<property name="driverClassName" value="${jdbc.driver}" />
 			<property name="url" value="${jdbc.url}" />
@@ -98,73 +109,65 @@
 			<property name="minIdle" value="0" />
 			<property name="defaultAutoCommit" value="false" />
 		</bean>
-		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="true">
+		<jdbc:initialize-database data-source="dataSource"
+			ignore-failures="ALL" enabled="true">
 			<jdbc:script location="classpath:sql/mysql/schema.sql" />
-			<jdbc:script location="classpath:sql/mysql/import-data.sql" encoding="UTF-8"/>
+			<jdbc:script location="classpath:sql/mysql/import-data.sql"
+				encoding="UTF-8" />
 		</jdbc:initialize-database>
 		<!-- 数据源配置,使用应用服务器的数据库连接池 -->
-		<!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" />-->
+		<!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" 
+			/> -->
 	</beans>
-	
+
 	<!-- local development环境 -->
 	<beans profile="development">
-		<context:property-placeholder ignore-resource-not-found="true"
+		<context:property-placeholder
+			ignore-resource-not-found="true"
 			location="classpath*:/application.properties,
-          			  classpath*:/application.development.properties" />	
+          			  classpath*:/application.development.properties" />
 		<!-- Tomcat JDBC连接池 -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+			destroy-method="close">
 			<property name="driverClassName" value="${jdbc.driver}" />
 			<property name="url" value="${jdbc.url}" />
 			<property name="username" value="${jdbc.username}" />
 			<property name="password" value="${jdbc.password}" />
 			<property name="defaultAutoCommit" value="false" />
 		</bean>
-		 <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="true">
-			<jdbc:script location="classpath:sql/mysql/schema.sql" />
-			<jdbc:script location="classpath:sql/mysql/import-data.sql" encoding="UTF-8"/>
-		</jdbc:initialize-database>
 	</beans>
-	
+
 	<!-- functional test 环境 -->
 	<beans profile="functional">
-		<context:property-placeholder ignore-resource-not-found="true"
+		<context:property-placeholder
+			ignore-resource-not-found="true"
 			location="classpath*:/application.properties,
           			  classpath*:/application.functional.properties,
-          			  classpath*:/application.functional-local.properties" />	
-
+          			  classpath*:/application.functional-local.properties" />
 		<!-- Tomcat JDBC连接池 -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+			destroy-method="close">
 			<property name="driverClassName" value="${jdbc.driver}" />
 			<property name="url" value="${jdbc.url}" />
 			<property name="username" value="${jdbc.username}" />
 			<property name="password" value="${jdbc.password}" />
 			<property name="defaultAutoCommit" value="false" />
 		</bean>
-
-		<!-- 初始化数据表结构 -->
-		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
-			<jdbc:script location="classpath:sql/mysql/schema.sql" />
-		</jdbc:initialize-database>	
 	</beans>
-	
+
 	<!-- unit test环境 -->
 	<beans profile="test">
-	 	<context:property-placeholder ignore-resource-not-found="true"
+		<context:property-placeholder
+			ignore-resource-not-found="true"
 			location="classpath*:/application.properties,
-          			  classpath*:/application.test.properties" />	
-		
+          			  classpath*:/application.test.properties" />
 		<!-- Spring Simple连接池 -->
-		<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<bean id="dataSource"
+			class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 			<property name="driverClass" value="${jdbc.driver}" />
 			<property name="url" value="${jdbc.url}" />
 			<property name="username" value="${jdbc.username}" />
 			<property name="password" value="${jdbc.password}" />
 		</bean>
-
-		<!-- 初始化数据表结构 与默认数据-->
-		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
-			<jdbc:script location="classpath:sql/mysql/schema.sql" />
-			<jdbc:script location="classpath:data/h2/import-data.sql" encoding="UTF-8"/>
-		</jdbc:initialize-database>
 	</beans>
 </beans>

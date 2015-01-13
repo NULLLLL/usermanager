@@ -21,11 +21,6 @@
 				<div class="alert alert-error input-medium controls">
 					<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
 				</div>
-				<script type="text/javascript">
-				function resetVal(){
-					$('#username').val('');
-					$('#password').val('');
-				}</script>
 			<%
 			}
 		}
