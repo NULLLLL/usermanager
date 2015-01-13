@@ -1,4 +1,4 @@
-package com.usermanager.service.account;
+package com.usermanager.base.service;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 

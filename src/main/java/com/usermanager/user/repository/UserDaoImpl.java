@@ -1,4 +1,4 @@
-package com.usermanager.repository;
+package com.usermanager.user.repository;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.usermanager.entity.User;
+import com.usermanager.user.entity.User;
 
 public class UserDaoImpl implements UserDaoCustom {
 

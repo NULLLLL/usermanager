@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.usermanager.service.account;
+package com.usermanager.base.service;
 
 import java.io.Serializable;
 
@@ -23,7 +23,8 @@ import org.apache.shiro.util.ByteSource;
 import org.springside.modules.utils.Encodes;
 
 import com.google.common.base.Objects;
-import com.usermanager.entity.User;
+import com.usermanager.user.entity.User;
+import com.usermanager.user.service.AccountService;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 

@@ -1,12 +1,12 @@
-package com.usermanager.service.account;
+package com.usermanager.base.service;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.usermanager.entity.User;
-import com.usermanager.repository.UserDao;
-import com.usermanager.service.account.ShiroDbRealm.ShiroUser;
+import com.usermanager.base.service.ShiroDbRealm.ShiroUser;
+import com.usermanager.user.entity.User;
+import com.usermanager.user.repository.UserDao;
 
 /**
  * shiro manager

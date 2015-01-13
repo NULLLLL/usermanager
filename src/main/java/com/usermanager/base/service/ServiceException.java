@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.usermanager.service;
+package com.usermanager.base.service;
 
 /**
  * Service层公用的Exception.

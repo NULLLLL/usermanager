@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.usermanager.entity;
+package com.usermanager.user.entity;
 
 import java.util.Date;
 
@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.usermanager.base.entity.IdEntity;
 
 @Entity
 @Table(name = "ss_user")

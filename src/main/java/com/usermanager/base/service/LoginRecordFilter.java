@@ -1,4 +1,4 @@
-package com.usermanager.service.account;
+package com.usermanager.base.service;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

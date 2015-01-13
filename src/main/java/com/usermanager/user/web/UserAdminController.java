@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.usermanager.web.account;
+package com.usermanager.user.web;
 
 import net.sf.json.JSONArray;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.usermanager.service.account.AccountService;
+import com.usermanager.user.service.AccountService;
 
 /**
  * 管理员管理用户的Controller.

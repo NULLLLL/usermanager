@@ -1,8 +1,8 @@
-package com.usermanager.repository;
+package com.usermanager.user.repository;
 
 import java.util.List;
 
-import com.usermanager.entity.User;
+import com.usermanager.user.entity.User;
 
 public interface UserDaoCustom {
 	

@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.usermanager.web.account;
+package com.usermanager.user.web;
 
 import javax.validation.Valid;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.usermanager.entity.User;
-import com.usermanager.service.account.AccountService;
+import com.usermanager.user.entity.User;
+import com.usermanager.user.service.AccountService;
 
 /**
  * 用户注册的Controller.

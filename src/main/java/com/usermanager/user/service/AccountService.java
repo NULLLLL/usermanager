@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.usermanager.service.account;
+package com.usermanager.user.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,13 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.security.utils.Digests;
-import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;
 
-import com.usermanager.entity.User;
-import com.usermanager.repository.UserDao;
-import com.usermanager.service.ServiceException;
-import com.usermanager.service.account.ShiroDbRealm.ShiroUser;
+import com.usermanager.base.service.ServiceException;
+import com.usermanager.base.service.ShiroDbRealm;
+import com.usermanager.base.service.ShiroDbRealm.ShiroUser;
+import com.usermanager.user.entity.User;
+import com.usermanager.user.repository.UserDao;
+import com.util.DateUtil;
 
 /**
  * 用户管理类.
@@ -34,7 +35,7 @@ import com.usermanager.service.account.ShiroDbRealm.ShiroUser;
  */
 // Spring Service Bean的标识.
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class AccountService {
 
 	public static final String HASH_ALGORITHM = "SHA-1";
@@ -45,8 +46,6 @@ public class AccountService {
 
 	@Autowired
 	private UserDao userDao;
-
-	private Clock clock = Clock.DEFAULT;
 
 	public List<User> getAllUser() {
 		return (List<User>) userDao.findAll();
@@ -62,7 +61,7 @@ public class AccountService {
 
 	public void registerUser(User user) {
 		entryptPassword(user);
-		user.setRegisterDate(clock.getCurrentDate());
+		user.setRegisterDate(DateUtil.getNowTimestamp());
 		userDao.save(user);
 	}
 
@@ -97,6 +96,10 @@ public class AccountService {
 		}
 		return list;
 	}
+	
+	public int editPassword(long userId){
+		return 1;
+	}
 
 	/**
 	 * 判断是否超级管理员.
@@ -124,7 +127,4 @@ public class AccountService {
 		user.setPassword(Encodes.encodeHex(hashPassword));
 	}
 
-	public void setClock(Clock clock) {
-		this.clock = clock;
-	}
 }
