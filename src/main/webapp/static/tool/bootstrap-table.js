@@ -203,7 +203,7 @@
         field: undefined,
         title: undefined,
         'class': undefined,
-        align: undefined, // left, right, center
+        align: 'center', // left, right, center
         halign: undefined, // left, right, center
         valign: undefined, // top, middle, bottom
         width: undefined,

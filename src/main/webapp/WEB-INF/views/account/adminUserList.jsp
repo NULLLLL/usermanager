@@ -25,16 +25,7 @@
 	        Refresh
 	    </button>
 	</div>
-	<table id="tableId" data-toggle="table" data-url="${ctx}/admin/userTable" data-pagination="true" data-cache="false" data-height="300">
-    <thead>
-        <tr>
-            <th data-align="center" data-field="id" data-formatter="adminUserList.idformatter"></th>
-            <th data-align="center" data-field="name" data-sortable="true">姓名</th>
-            <th data-align="center" data-field="loginName" data-sortable="true">登录名</th>
-            <th data-align="center" data-field="registerDate" data-sortable="true">注册时间</th>
-            <th data-align="center" data-field="id" data-formatter="adminUserList.operationFormatter">操作</th>
-        </tr>
-    </thead>
+	<table id="tableId">
 	</table>
 <script type='text/javascript' src='${ctx}/dwr/common/engine.js'></script>
 <script type='text/javascript' src='${ctx}/dwr/common/util.js'></script>
