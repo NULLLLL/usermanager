@@ -14,11 +14,6 @@ $(function(){
 	 $('#load-data').click(function () {
     	 		$('#tableId').bootstrapTable('load', rows);
 	 });
-	 $('#refresh').click(function () {
-		 $('#tableId').bootstrapTable('refresh', {
-             url: '/usermanager/admin/userTable'
-         });
-     });
 });
 adminUserList.initDataTable = function (){
 	$('#tableId').bootstrapTable({
@@ -37,7 +32,7 @@ adminUserList.initDataTable = function (){
 	    minimumCountColumns: 2,
 	    clickToSelect: true,
 	    columns: [
-	              	{field:'id', formatter:adminUserList.idformatter},
+	              	{field:'id', checkbox:true},
 	              	{field:'name', title:'姓名', sortable:true},
 	              	{field:'loginName', title:'登录名', sortable:true},
 	              	{field:'registerDate', title:'注册时间', sortable:true},
@@ -74,12 +69,20 @@ adminUserList.operationClick = function(flag, userId){
 					$('#messageDiv').attr('class','alert alert-danger');
 				}
 				$('#messagespan').html(data);
+				adminUserList.refreshTable();
 				$('#messageDiv').show();
 			});
 		}
 	}else if (flag == 1) {
 		
+		
 	}else if (flag == 2) {
 		
 	}
+};
+
+adminUserList.refreshTable = function(){
+	$('#tableId').bootstrapTable('refresh', {
+        url: ctx + '/admin/userTable'
+    });
 };

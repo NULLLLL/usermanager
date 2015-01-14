@@ -17,4 +17,8 @@ public class UserAjax {
 		return accountService.deleteUser(userId);
 	}
 
+	public int editPassword(long id, String password) {
+		return accountService.editPassword(id, password);
+	}
+
 }

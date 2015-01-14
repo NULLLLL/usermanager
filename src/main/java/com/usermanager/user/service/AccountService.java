@@ -99,7 +99,13 @@ public class AccountService {
 		return list;
 	}
 
-	public int editPassword(long userId) {
+	public int editPassword(long id, String password) {
+		User user = userDao.findOne(id);
+		if (user == null)
+			return 0;
+		user.setPassword(password);
+		entryptPassword(user);
+		userDao.save(user);
 		return 1;
 	}
 
