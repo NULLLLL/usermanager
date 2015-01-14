@@ -2,18 +2,58 @@
  * 
  */
 var adminUserList = function(){};
-
+var rows = [ {
+	  "id" : 1,
+	  "registerDate" : "2012-06-04 01:00:00.0",
+	  "name" : "Admin",
+	  "loginName" : "admin"
+	} ];
+$(function(){
+	 $('#load-data').click(function () {
+    	 		$('#tableId').bootstrapTable('load', rows);
+	 });
+	 $('#refresh').click(function () {
+		 $('#tableId').bootstrapTable('refresh', {
+             url: '/usermanager/admin/userTable'
+         });
+     });
+});
 
 adminUserList.idformatter = function(data, record){
 	return '<input type="checkbox" value="' + record.id +'"/>';
 };
 
 adminUserList.operationFormatter = function(value, row, index){
-	return ['<a href="javascript:void(0)" onclick="adminUserList.operationClick()" >删除用户</a>',
-	        '<a href="javascript:void(0)" onclick="adminUserList.operationClick()" >重置密码</a>',
-	        '<a href="javascript:void(0)" onclick="adminUserList.operationClick()" >修改名称</a>'].join('&nbsp;');
+	return ['<button type="button" class="btn btn-danger" onclick="adminUserList.operationClick(0,' + value + ')" >删除用户</button>',
+	        '<button type="button" class="btn btn-warning" onclick="adminUserList.operationClick(1,' + value + ')" >重置密码</button>',
+	        '<button type="button" class="btn btn-info" onclick="adminUserList.operationClick(2,' + value + ')" >修改信息</button>'].join('&nbsp;');
+};
+var warning = '<div id="messageDiv" class="alert alert-success" style="display: none;">' + 
+								'<button data-dismiss="alert" class="close">×</button>' + 
+								'<span id="messagespan"></span>' +
+							'</div>'
+adminUserList.operationClick = function(flag, userId){
+	if (flag == 0) {//del
+		if (confirm('是否确认删除该用户？')) {
+			userAjax.delUser(0,function callback(data){
+				$('#warning').append(warning);
+				if (data == 1) {
+					data ='删除成功';
+				}else if (data == 2) {
+					data = '尝试删除超级管理员用户失败';
+					$('#messageDiv').attr('class','alert alert-danger');
+				}else {
+					data = '删除用户失败';
+					$('#messageDiv').attr('class','alert alert-danger');
+				}
+				$('#messagespan').html(data);
+				$('#messageDiv').show();
+			});
+		}
+	}else if (flag == 1) {
+		
+	}else if (flag == 2) {
+		
+	}
 };
 
-adminUserList.operationClick = function(){
-	alert(1)
-}

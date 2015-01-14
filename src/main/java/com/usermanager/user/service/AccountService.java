@@ -21,8 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Encodes;
 
-import com.usermanager.base.service.ServiceException;
-import com.usermanager.base.service.ShiroDbRealm;
 import com.usermanager.base.service.ShiroDbRealm.ShiroUser;
 import com.usermanager.user.entity.User;
 import com.usermanager.user.repository.UserDao;
@@ -72,12 +70,16 @@ public class AccountService {
 		userDao.save(user);
 	}
 
-	public void deleteUser(Long id) {
+	public int deleteUser(long id) {
 		if (isSupervisor(id)) {
 			logger.warn("操作员{}尝试删除超级管理员用户", getCurrentUserName());
-			throw new ServiceException("不能删除超级管理员用户");
+			return 2;
 		}
+		User user = userDao.findOne(id);
+		if (user == null)
+			return 0;
 		userDao.delete(id);
+		return 1;
 
 	}
 
@@ -96,15 +98,15 @@ public class AccountService {
 		}
 		return list;
 	}
-	
-	public int editPassword(long userId){
+
+	public int editPassword(long userId) {
 		return 1;
 	}
 
 	/**
 	 * 判断是否超级管理员.
 	 */
-	private boolean isSupervisor(Long id) {
+	private boolean isSupervisor(long id) {
 		return id == 1;
 	}
 

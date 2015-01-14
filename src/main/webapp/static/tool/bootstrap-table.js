@@ -129,20 +129,20 @@
         queryParams: function (params) {return params;},
         queryParamsType: 'limit', // undefined
         responseHandler: function (res) {return res;},
-        pagination: false,
+        pagination: true,
         sidePagination: 'client', // client or server
         totalRows: 0, // server side need to set
         pageNumber: 1,
         pageSize: 10,
-        pageList: [10, 25, 50, 100],
+        pageList: [1, 5, 10, 25, 50, 100],
         search: false,
         searchAlign: 'right',
         selectItemName: 'btSelectItem',
         showHeader: true,
-        showColumns: false,
-        showRefresh: false,
+        showColumns: true,
+        showRefresh: true,
         showToggle: false,
-        smartDisplay: true,
+        smartDisplay: false,
         minimumCountColumns: 1,
         idField: undefined,
         cardView: false,
@@ -160,10 +160,10 @@
             return 'Loading, please wait…';
         },
         formatRecordsPerPage: function (pageNumber) {
-            return sprintf('%s records per page', pageNumber);
+            return sprintf('%s 条 / 页', pageNumber);
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
-            return sprintf('Showing %s to %s of %s rows', pageFrom, pageTo, totalRows);
+            return sprintf('显示的第 %s 条 - 第 %s 条，总共 %s 条', pageFrom, pageTo, totalRows);
         },
         formatSearch: function () {
             return 'Search';
