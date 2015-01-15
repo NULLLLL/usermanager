@@ -14,13 +14,16 @@
 <link href="${ctx}/static/styles/default.css" type="text/css" rel="stylesheet" />
 <link href="${ctx}/static/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <link href="${ctx}/static/jquery-validation/1.11.1/validate.css" type="text/css" rel="stylesheet" />
-<link href="${ctx}/static/tool/bootstrap-table.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/static/tool/bootstrap-table/bootstrap-table.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/static/tool/My97DatePicker/skin/WdatePicker.css" type="text/css" rel="stylesheet" />
 <script src="${ctx}/static/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/bootstrap/3.0.0/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/jquery-validation/1.11.1/messages_bs_zh.js" type="text/javascript"></script>
-<script src="${ctx}/static/tool/bootstrap-table.js"></script>
+<script src="${ctx}/static/tool/bootstrap-table/bootstrap-table.js"></script>
 <script src="${ctx}/static/tool/jquery.placeholder.js"></script>
+<script src="${ctx}/static/tool/My97DatePicker/WdatePicker.js"></script>
+
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/constructor.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/BaseClass.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/class/Sysutil.js?2015.01.05" ></script>
