@@ -6,6 +6,6 @@ import com.usermanager.user.entity.User;
 
 public interface UserDaoCustom {
 	
-	public List<User> getUserList(int pageSize, int pageNo, String order);
+	public List<User> getUserList(String params);
 
 }

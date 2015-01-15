@@ -33,7 +33,7 @@ import com.util.DateUtil;
  */
 // Spring Service Bean的标识.
 @Component
-@Transactional(readOnly = true)
+@Transactional
 public class AccountService {
 
 	public static final String HASH_ALGORITHM = "SHA-1";
@@ -45,14 +45,17 @@ public class AccountService {
 	@Autowired
 	private UserDao userDao;
 
+	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
 		return (List<User>) userDao.findAll();
 	}
 
+	@Transactional(readOnly = true)
 	public User getUser(Long id) {
 		return userDao.findOne(id);
 	}
 
+	@Transactional(readOnly = true)
 	public User findUserByLoginName(String loginName) {
 		return userDao.findByLoginName(loginName);
 	}
@@ -83,8 +86,9 @@ public class AccountService {
 
 	}
 
-	public List<Map<String, Object>> getUserList(int pageSize, int pageNo, String order) {
-		List<User> userList = userDao.getUserList(pageSize, pageNo, order);
+	@Transactional(readOnly = true)
+	public List<Map<String, Object>> getUserList(String params) {
+		List<User> userList = userDao.getUserList(params);
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		if (CollectionUtils.isNotEmpty(userList)) {
 			for (User user : userList) {
@@ -103,7 +107,7 @@ public class AccountService {
 		User user = userDao.findOne(id);
 		if (user == null)
 			return 0;
-		user.setPassword(password);
+		user.setPlainPassword(password);
 		entryptPassword(user);
 		userDao.save(user);
 		return 1;

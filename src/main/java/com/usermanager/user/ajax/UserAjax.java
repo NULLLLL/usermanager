@@ -2,12 +2,10 @@ package com.usermanager.user.ajax;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.usermanager.user.service.AccountService;
 
 @Component
-@Transactional(readOnly = true)
 public class UserAjax {
 
 	@Autowired

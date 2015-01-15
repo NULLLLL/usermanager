@@ -34,9 +34,8 @@ public class UserAdminController {
 
 	@RequestMapping(value = "/userTable")
 	@ResponseBody
-	public JSONArray getUserTable(@RequestParam(value = "_", required = false) String _, @RequestParam(value = "limit") int pageSize,
-			@RequestParam(value = "offset") int pageNo, @RequestParam(value = "order") String order) {
-		return JSONArray.fromObject(accountService.getUserList(pageSize, pageNo, order));
+	public JSONArray getUserTable(@RequestParam(value = "_", required = false) String _, @RequestParam(value = "params") String params) {
+		return JSONArray.fromObject(accountService.getUserList(params));
 	}
 	/*@RequestMapping(value = "delete/{id}")
 	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {

@@ -6,7 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import net.sf.json.JSONObject;
+
 import com.usermanager.user.entity.User;
+import com.util.StringHelper;
 
 public class UserDaoImpl implements UserDaoCustom {
 
@@ -19,24 +22,42 @@ public class UserDaoImpl implements UserDaoCustom {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> getUserList(int pageSize, int pageNo, String order) {
+	public List<User> getUserList(String params) {
 		StringBuilder hql = new StringBuilder(COMMONHQL);
-		hql.append(" order by id ").append(order);
+		StringBuilder makeWhere = makeWhere(params);
+		hql.append(makeWhere).append(" order by id asc");
 		Query query = em.createQuery(hql.toString());
-		int startIndex = pageNo * pageSize;
-		query.setFirstResult(startIndex);
-		query.setMaxResults(pageSize);
 		return query.getResultList();
 	}
 
 	public Long getCountWithParams(String params) {
 		StringBuilder hql = new StringBuilder(COUNTHQL);
+		StringBuilder makeWhere = makeWhere(params);
+		hql.append(makeWhere);
 		Query query = em.createQuery(hql.toString());
 		return (Long) query.getSingleResult();
 	}
 
-	private StringBuilder makeWhere() {
+	private StringBuilder makeWhere(String params) {
 		StringBuilder hql = new StringBuilder();
+		hql.append(" where 1=1 ");
+		if (StringHelper.isEmpty(params)) {
+			return hql;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(params);
+		if (jsonObject.has("name") && StringHelper.isNotEmpty(jsonObject.getString("name")))
+			hql.append(" and u.name like '%").append(jsonObject.getString("name")).append("%' ");
+
+		if (jsonObject.has("loginName") && StringHelper.isNotEmpty(jsonObject.getString("loginName")))
+			hql.append(" and u.loginName like '%").append(jsonObject.getString("loginName")).append("%' ");
+
+		if (jsonObject.has("startregisterDate") && StringHelper.isNotEmpty(jsonObject.getString("startregisterDate"))) {
+			hql.append(" and u.registerDate >='").append(jsonObject.getString("startregisterDate")).append("' ");
+		}
+
+		if (jsonObject.has("endregisterDate") && StringHelper.isNotEmpty(jsonObject.getString("endregisterDate"))) {
+			hql.append(" and u.registerDate <='").append(jsonObject.getString("endregisterDate")).append("' ");
+		}
 		return hql;
 	}
 }
