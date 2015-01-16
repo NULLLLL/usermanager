@@ -6,47 +6,58 @@
 <html>
 <head>
 	<title>用户管理</title>
+	
 </head>
 <body>
-		<div id="warning">
-			<div id="messageDiv" class="alert alert-success" style="display: none;">
-				<button data-dismiss="alert" class="close">×</button>
-				<span id="messagespan"></span>
-			</div>
+	<!-- <div id="warning">
+		<div id="messageDiv" class="alert alert-success" style="display: none;">
+			<button data-dismiss="alert" class="close">×</button>
+			<span id="messagespan"></span>
 		</div>
-	
-		<div class="panel-group" id="accordion_action">
-				 <div class="panel panel-info">
-				    <div class="panel-heading">
-				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion_action" href="#collapseOne_action">数据操作</a>
-				      </h4>
-				    </div>
-				    <div id="collapseOne_action" class="panel-collapse collapse in">
-				      <div class="panel-body">
-					      	<div id="searchDiv" class="row" style="margin-top:10px;margin-bottom:10px;">
-									<div class="input-group col-xs-2">
-										  <span class="input-group-addon">姓名</span>
-										  <input type="text" id="name" name="name" class="form-control"/>
-									</div>
-									<div class="input-group col-xs-2">
-										  <span class="input-group-addon">登录名</span>
-										  <input type="text" id="loginName" name="loginName" class="form-control"/>
-									</div>
-									<div class="input-group col-xs-4">
-										  <span class="input-group-addon">注册时间</span>
-										  <input type="text" id="startregisterDate" name="startregisterDate" class="form-control" onfocus="WdatePicker({skin:'whyGreen',isShowClear:true,readOnly:true})"/>
-										  <span class="input-group-addon">到</span>
-										  <input type="text" id="endregisterDate" name="endregisterDate" class="form-control" onfocus="WdatePicker({skin:'whyGreen',isShowClear:true,readOnly:true})"/>
-									</div>
-									<div class="col-xs-2">
-										<button type="submit" class="btn btn-primary btn-sm" id="searchData" >搜索</button>
-									</div>		
-							</div>
-				      </div>
-				    </div>
+	</div> -->
+	<div class="panel-body">
+      	<div id="searchDiv" class="row" style="margin-top:10px;margin-bottom:10px;">
+				<div class="input-group col-xs-2">
+					  <input type="text" id="name" placeholder="姓名" name="name" class="form-control floating-label"/>
 				</div>
+				<div class="input-group col-xs-2">
+					  <input type="text" id="loginName" placeholder="登录名" name="loginName" class="form-control floating-label"/>
+				</div>
+				<div class="input-group col-xs-4">
+					  <span class="input-group-addon">注册时间</span>
+					  <input type="text" id="startregisterDate" name="startregisterDate" class="form-control" onfocus="WdatePicker({skin:'whyGreen',isShowClear:true,readOnly:true})"/>
+					  <span class="input-group-addon">到</span>
+					  <input type="text" id="endregisterDate" name="endregisterDate" class="form-control" onfocus="WdatePicker({skin:'whyGreen',isShowClear:true,readOnly:true})"/>
+				</div>
+				<div class="col-xs-2">
+					<button type="submit" class="btn btn-primary btn-sm" id="searchData" >搜索</button>
+				</div>		
 		</div>
+  </div>
+  	<div id="userInfo" class="modal fade" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        <h4 class="modal-title">用户信息</h4>
+		      </div>
+		      <div class="modal-body" style="height: 30%;">
+		      			<div class="input-group col-xs-10">
+	      						<span>姓名</span>
+								  <input type="text" id="editName" name="name" class="form-control"/>
+							</div>
+							<div class="input-group col-xs-10" style="margin-top: 20px;">
+									<span>登录名</span>
+								  <input type="text" id="editLoginName" name="loginName" class="form-control"/>
+							</div>
+		      </div>
+		      <div class="modal-footer">
+		      		<button class="btn btn-default btn-flat" data-dismiss="modal"><i class="mdi-navigation-close"></i> Cancel</button>
+	      			<button id="" class="btn btn-primary btn-flat"><i class="mdi-navigation-check"></i> Ok</button>
+		      </div>
+		    </div>
+		  </div>
+	</div>
 	<table id="tableId">
 	</table>
 <script type='text/javascript' src='${ctx}/dwr/common/engine.js'></script>

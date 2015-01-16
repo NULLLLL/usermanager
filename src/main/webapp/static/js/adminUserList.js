@@ -47,8 +47,10 @@ adminUserList.initDataTable = function() {
 	});
 };
 
-adminUserList.nameFormatter = function(data){
-	return '<a style="cursor:pointer" title="点击查看详细信息">' + data + '</a>'
+adminUserList.nameFormatter = function(data, record){
+	var name = record.name;
+	var loginName = record.loginName;
+	return '<a style="cursor:pointer" title="点击查看或修改用户详细信息" onclick="adminUserList.userInfoDiv(\'' + name +'\',\'' + loginName + '\')">' + data + '</a>'
 };
 
 adminUserList.searchTable = function() {
@@ -64,9 +66,7 @@ adminUserList.operationFormatter = function(value, row, index) {
 			'<button type="button" class="btn btn-danger" onclick="adminUserList.operationClick(0,'
 					+ value + ')" >删除用户</button>',
 			'<button type="button" class="btn btn-warning" onclick="adminUserList.operationClick(1,'
-					+ value + ')" >重置密码</button>',
-			'<button type="button" class="btn btn-info" onclick="adminUserList.operationClick(2,'
-					+ value + ')" >修改信息</button>' ].join('&nbsp;');
+					+ value + ')" >重置密码</button>' ].join('&nbsp;');
 };
 
 var warning = '<div id="messageDiv" class="alert alert-success" style="display: none;">'
@@ -83,18 +83,23 @@ adminUserList.operationClick = function(flag, userId) {
 					adminUserList.refreshTable();
 				} else if (data == 2) {
 					data = '尝试删除超级管理员用户失败';
-					$('#messageDiv').attr('class', 'alert alert-danger');
+//					$('#messageDiv').attr('class', 'alert alert-danger');
 				} else {
 					data = '删除用户失败';
-					$('#messageDiv').attr('class', 'alert alert-danger');
+//					$('#messageDiv').attr('class', 'alert alert-danger');
 				}
-				$('#messagespan').html(data);
-				$('#messageDiv').show();
+//				$('#messagespan').html(data);
+//				$('#messageDiv').show();
+				tool.message(data);
 			});
 		}
 	} else if (flag == 1) {
-
-	} else if (flag == 2) {
-
+		tool.message('test');
 	}
+};
+
+adminUserList.userInfoDiv = function(name, loginName){
+	$('#editName').val(name);
+	$('#editLoginName').val(loginName);
+	$('#userInfo').modal('show');
 };
