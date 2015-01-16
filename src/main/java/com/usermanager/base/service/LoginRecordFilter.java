@@ -40,7 +40,7 @@ public class LoginRecordFilter extends FormAuthenticationFilter {
 		CaptchaUsernamePasswordToken token = createToken(request, response);
 		try {
 			/* 图形验证码验证 */
-//			doCaptchaValidate((HttpServletRequest) request, token);
+			//			doCaptchaValidate((HttpServletRequest) request, token);
 			Subject subject = getSubject(request, response);
 			subject.login(token);// 正常验证
 			subject.isPermitted("login");
