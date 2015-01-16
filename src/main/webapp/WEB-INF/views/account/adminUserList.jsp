@@ -53,7 +53,7 @@
 		      </div>
 		      <div class="modal-footer">
 		      		<button class="btn btn-default btn-flat" data-dismiss="modal"><i class="mdi-navigation-close"></i> Cancel</button>
-	      			<button id="" class="btn btn-primary btn-flat"><i class="mdi-navigation-check"></i> Ok</button>
+	      			<button id="saveUserInfo" class="btn btn-primary btn-flat"><i class="mdi-navigation-check"></i> Ok</button>
 		      </div>
 		    </div>
 		  </div>

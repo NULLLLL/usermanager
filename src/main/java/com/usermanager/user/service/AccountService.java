@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Encodes;
 
-import com.usermanager.base.service.ShiroDbRealm.ShiroUser;
+import com.usermanager.base.service.ShiroManager;
 import com.usermanager.user.entity.User;
 import com.usermanager.user.repository.UserDao;
 import com.util.DateUtil;
+import com.util.StringHelper;
 
 /**
  * 用户管理类.
@@ -44,6 +43,9 @@ public class AccountService {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private ShiroManager shiroManager;
 
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
@@ -66,16 +68,24 @@ public class AccountService {
 		userDao.save(user);
 	}
 
-	public void updateUser(User user) {
-		if (StringUtils.isNotBlank(user.getPlainPassword())) {
-			entryptPassword(user);
-		}
+	public int enitUserInfo(long id, String name, String loginName) {
+		if (id <= 0)
+			return 0;
+		User user = userDao.findOne(id);
+		if (user == null)
+			return 0;
+		if (StringHelper.isNotEmpty(name))
+			user.setName(name);
+		if (StringHelper.isNotEmpty(loginName))
+			user.setName(loginName);
 		userDao.save(user);
+		return 1;
+
 	}
 
 	public int deleteUser(long id) {
 		if (isSupervisor(id)) {
-			logger.warn("操作员{}尝试删除超级管理员用户", getCurrentUserName());
+			logger.warn("操作员{}尝试删除超级管理员用户", shiroManager.getCurrentUser().getLoginName());
 			return 2;
 		}
 		User user = userDao.findOne(id);
@@ -118,14 +128,6 @@ public class AccountService {
 	 */
 	private boolean isSupervisor(long id) {
 		return id == 1;
-	}
-
-	/**
-	 * 取出Shiro中的当前用户LoginName.
-	 */
-	private String getCurrentUserName() {
-		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		return user.loginName;
 	}
 
 	/**

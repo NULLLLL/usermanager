@@ -8,7 +8,7 @@ var tool = function() {
 /**
  * 提示框
  */
-tool.message = function (message){
+tool.alert = function (message){
 	var msg = $.globalMessenger().post({
 		message: message,
 		type: 'info',

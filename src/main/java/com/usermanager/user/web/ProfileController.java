@@ -5,8 +5,6 @@
  *******************************************************************************/
 package com.usermanager.user.web;
 
-import javax.validation.Valid;
-
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.usermanager.base.service.ShiroDbRealm.ShiroUser;
-import com.usermanager.user.entity.User;
 import com.usermanager.user.service.AccountService;
 
 /**
@@ -37,13 +34,6 @@ public class ProfileController {
 		Long id = getCurrentUserId();
 		model.addAttribute("user", accountService.getUser(id));
 		return "account/profile";
-	}
-
-	@RequestMapping(method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("user") User user) {
-		accountService.updateUser(user);
-		updateCurrentUserName(user.getName());
-		return "redirect:/";
 	}
 
 	/**

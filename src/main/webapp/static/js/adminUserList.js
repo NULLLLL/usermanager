@@ -15,6 +15,9 @@ $(function() {
 	$(window).resize(function() {
 		$('#tableId').bootstrapTable('resetView');
 	});
+	$('#saveUserInfo').click(function() {
+		adminUserList.saveUserInfo();
+	});
 });
 
 adminUserList.initDataTable = function() {
@@ -46,11 +49,11 @@ adminUserList.initDataTable = function() {
 		            		]
 	});
 };
-
 adminUserList.nameFormatter = function(data, record){
 	var name = record.name;
 	var loginName = record.loginName;
-	return '<a style="cursor:pointer" title="点击查看或修改用户详细信息" onclick="adminUserList.userInfoDiv(\'' + name +'\',\'' + loginName + '\')">' + data + '</a>'
+	var userId = record.id;
+	return '<a style="cursor:pointer" title="点击查看或修改用户详细信息" onclick="adminUserList.userInfoDiv(\'' + name +'\',\'' + loginName +'\',\'' + userId +  '\')">' + data + '</a>'
 };
 
 adminUserList.searchTable = function() {
@@ -80,7 +83,7 @@ adminUserList.operationClick = function(flag, userId) {
 				$('#warning').append(warning);
 				if (data == 1) {
 					data = '删除成功';
-					adminUserList.refreshTable();
+					adminUserList.searchTable();
 				} else if (data == 2) {
 					data = '尝试删除超级管理员用户失败';
 //					$('#messageDiv').attr('class', 'alert alert-danger');
@@ -90,16 +93,39 @@ adminUserList.operationClick = function(flag, userId) {
 				}
 //				$('#messagespan').html(data);
 //				$('#messageDiv').show();
-				tool.message(data);
+				tool.alert(data);
 			});
 		}
 	} else if (flag == 1) {
-		tool.message('test');
+		tool.alert('test');
 	}
 };
-
-adminUserList.userInfoDiv = function(name, loginName){
+var selUserId;
+var selUserName;
+var selUserLoginName;
+adminUserList.userInfoDiv = function(name, loginName, id){
 	$('#editName').val(name);
 	$('#editLoginName').val(loginName);
+	selUserId = id;
+	selUserName = name;
+	selUserLoginName = loginName;
 	$('#userInfo').modal('show');
+};
+
+adminUserList.saveUserInfo = function(){
+	var name = $('#editName').val();
+	var loginName = $('#editLoginName').val();
+	if (name == selUserName)
+		name = '';
+	if (loginName == selUserLoginName)
+		loginName = '';
+	userAjax.editUserInfo(selUserId, name, loginName, function callback(data){
+		if (data == 1) {
+			data = '保存成功';
+			adminUserList.searchTable();
+		} else
+			data = '保存失败';
+		$('#userInfo').modal('hide');
+		tool.alert(data);
+	});
 };

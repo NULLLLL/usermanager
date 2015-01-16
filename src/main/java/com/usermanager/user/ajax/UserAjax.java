@@ -19,4 +19,8 @@ public class UserAjax {
 		return accountService.editPassword(id, password);
 	}
 
+	public int editUserInfo(long id, String name, String loginName) {
+		return accountService.enitUserInfo(id, name, loginName);
+	}
+
 }
