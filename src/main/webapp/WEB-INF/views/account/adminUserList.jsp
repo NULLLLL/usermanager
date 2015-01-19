@@ -33,6 +33,14 @@
 					<button type="submit" class="btn btn-primary btn-sm" id="searchData" >搜索</button>
 				</div>		
 		</div>
+		<div>
+			<div class="col-xs-2">
+					<button type="button" class="btn btn-primary btn-sm" id="registerUser" >新建用户</button>
+			</div>	
+			<div class="col-xs-2">
+					<button type="button" class="btn btn-primary btn-danger" id="delSelectedUser" >批量删除</button>
+			</div>
+		</div>
   </div>
   	<div id="userInfo" class="modal fade" tabindex="-1">
 		  <div class="modal-dialog">
@@ -43,17 +51,37 @@
 		      </div>
 		      <div class="modal-body" style="height: 30%;">
 		      			<div class="input-group col-xs-10">
-	      						<span>姓名</span>
-								  <input type="text" id="editName" name="name" class="form-control"/>
+								  <input type="text" id="editName" name="name" placeholder="姓名" class="form-control floating-label"/>
 							</div>
 							<div class="input-group col-xs-10" style="margin-top: 20px;">
-									<span>登录名</span>
-								  <input type="text" id="editLoginName" name="loginName" class="form-control"/>
+								  <input type="text" id="editLoginName" name="loginName" placeholder="用户名" class="form-control floating-label"/>
 							</div>
 		      </div>
 		      <div class="modal-footer">
 		      		<button class="btn btn-default btn-flat" data-dismiss="modal"><i class="mdi-navigation-close"></i> Cancel</button>
 	      			<button id="saveUserInfo" class="btn btn-primary btn-flat"><i class="mdi-navigation-check"></i> Ok</button>
+		      </div>
+		    </div>
+		  </div>
+	</div>
+	<div id="registerUserDiv" class="modal fade" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        <h4 class="modal-title">注册用户</h4>
+		      </div>
+		      <div class="modal-body" style="height: 30%;">
+		      			<div class="input-group col-xs-10">
+								  <input type="text" id="newName" name="name" placeholder="姓名"class="form-control floating-label"/>
+							</div>
+							<div class="input-group col-xs-10" style="margin-top: 20px;">
+								  <input type="text" id="newLoginName"name="loginName" placeholder="用户名" class="form-control floating-label"/>
+							</div>
+		      </div>
+		      <div class="modal-footer">
+		      		<button class="btn btn-default btn-flat" data-dismiss="modal"><i class="mdi-navigation-close"></i> Cancel</button>
+	      			<button id="registerUserBtn" class="btn btn-primary btn-flat"><i class="mdi-navigation-check"></i> Ok</button>
 		      </div>
 		    </div>
 		  </div>
@@ -64,5 +92,10 @@
 <script type='text/javascript' src='${ctx}/dwr/common/util.js'></script>
 <script type='text/javascript' src='${ctx}/dwr/common/interface/userAjax.js'></script>
 <script type="text/javascript" src="${ctx}/static/js/adminUserList.js?2015.01.07"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $.material.init();
+	 });
+</script>
 </body>
 </html>

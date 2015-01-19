@@ -14317,8 +14317,8 @@ select[multiple].form-control.focus {
   opacity: 0;
 }
 .form-control-wrapper .form-control:not(.empty) ~ .floating-label {
-  top: -10px;
-  font-size: 10px;
+  top: -12px;
+  font-size: 12px;
   opacity: 1;
 }
 .form-control-wrapper .form-control:focus:invalid ~ .floating-label,

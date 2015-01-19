@@ -28,7 +28,7 @@
       "togglebutton": true,
       "radio": true,
       "arrive": true,
-      "autofill": false,
+      "autofill": true,
 
       "withRipples": [
         ".btn:not(.btn-link)",
@@ -75,9 +75,10 @@
 
         // Add floating label if required
         if ($this.hasClass("floating-label")) {
-          var placeholder = $this.attr("placeholder");
-          $this.attr("placeholder", null).removeClass("floating-label");
-          $this.after("<div class=floating-label>" + placeholder + "</div>");
+					var placeholder = $this.attr("placeholder");
+					focused = setInterval(function() {clearInterval(focused);}, 1);
+					$this.attr("placeholder", null).removeClass("floating-label");
+					$this.after("<div class=floating-label>" + placeholder + "</div>");
         }
 
         // Add hint label if required

@@ -18,6 +18,10 @@ $(function() {
 	$('#saveUserInfo').click(function() {
 		adminUserList.saveUserInfo();
 	});
+	$('#registerUser').click(function() {
+		adminUserList.registerUser();
+	});
+	
 });
 
 adminUserList.initDataTable = function() {
@@ -129,3 +133,8 @@ adminUserList.saveUserInfo = function(){
 		tool.alert(data);
 	});
 };
+
+adminUserList.registerUser = function (){
+	$('#newName').val('');
+	$('#registerUserDiv').modal('show');
+}

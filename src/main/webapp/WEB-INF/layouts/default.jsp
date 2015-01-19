@@ -28,7 +28,7 @@
 <script src="${ctx}/static/tool/jquery.placeholder.js"></script>
 <script src="${ctx}/static/tool/My97DatePicker/WdatePicker.js"></script>
 <script src="${ctx}/static/tool/bootstrap-material/js/ripples.min.js"></script>
-<script src="${ctx}/static/tool/bootstrap-material/js/material.min.js"></script>
+<script src="${ctx}/static/tool/bootstrap-material/js/material.js"></script>
 <script src="${ctx}/static/tool/messenger/js/messenger.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/constructor.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/BaseClass.js" ></script>
@@ -38,9 +38,6 @@
 	var sysutil = New(Sysutil,[]);
 	var context = '${ctx}';
 	var $ = jQuery.noConflict();
-  $(document).ready(function() {
-      $.material.init();
- 	 });
   $._messengerDefaults = {
 		  extraClasses: 'messenger-fixed messenger-theme-future messenger-on-top'
 		}
