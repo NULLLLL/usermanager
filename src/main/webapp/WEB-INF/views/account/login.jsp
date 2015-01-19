@@ -24,9 +24,9 @@
 	body {
 		width:100%;
 		height:100%;
-		/*background-image:url(${ctx}/static/images/background.jpg);
+		background-image:url(${ctx}/static/images/background.jpg);
 		background-repeat: no-repeat;
-		background-size : 100% 100%;**/
+		background-size : 100% 100%;
 	}
 	form {
 		opacity: 0.9;
@@ -36,14 +36,14 @@
 
 <body>
 <div style="position: absolute;top:20%;left:40%;width:15%">
-	<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal ">
+	<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal">
 		<%
 			if(request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME) != null) {
 				String error = request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME).toString();
 			if(error != null){
 				System.out.print(error);
 		%>
-					<div class="alert alert-error input-medium controls">
+					<div class="alert alert-error input-medium ">
 						<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
 					</div>
 		<%
