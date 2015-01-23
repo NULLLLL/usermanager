@@ -38,7 +38,7 @@
 					<button type="button" class="btn btn-primary btn-sm" id="registerUser" >新建用户</button>
 			</div>	
 			<div class="col-xs-2">
-					<button type="button" class="btn btn-primary btn-danger" id="delSelectedUser" >批量删除</button>
+					<button type="button" class="btn btn-primary btn-danger" id="socket" >socket</button>
 			</div>
 		</div>
   </div>

@@ -21,6 +21,10 @@ $(function() {
 	$('#registerUser').click(function() {
 		adminUserList.registerUser();
 	});
+	$('#socket').click(function() {
+		adminUserList.webSocket();
+	});
+	
 	
 });
 
@@ -29,7 +33,7 @@ adminUserList.initDataTable = function() {
 		method : 'get',
 		url : ctx + '/admin/userTable',
 		cache : false,
-		height : 400,
+		height : 800,
 		queryParams : function(params) {
 			return {
 				params : sysutil.findFormData('#searchDiv :input')
@@ -49,6 +53,7 @@ adminUserList.initDataTable = function() {
 		            {field : 'name',title : '姓名',sortable : true,formatter : adminUserList.nameFormatter}, 
 		            {field : 'loginName',title : '登录名',sortable : true}, 
 		            {field : 'registerDate',title : '注册时间',sortable : true}, 
+		            {field : 'email',title : '邮箱',sortable : true}, 
 		            {field : 'id',title : '操作',formatter : adminUserList.operationFormatter} 
 		            		]
 	});
@@ -137,4 +142,64 @@ adminUserList.saveUserInfo = function(){
 adminUserList.registerUser = function (){
 	$('#newName').val('');
 	$('#registerUserDiv').modal('show');
+}
+
+adminUserList.webSocket = function(){
+	$(function(){  
+		var Sock = function() {  
+     var socket;  
+     if (!window.WebSocket) {  
+         window.WebSocket = window.MozWebSocket;  
+     	}  
+     if (window.WebSocket) {  
+         socket = new WebSocket("ws://localhost:8080/websocket");  
+         socket.onopen = onopen;  
+         socket.onmessage = onmessage;  
+         socket.onclose = onclose;  
+     } else  
+         alert("Your browser does not support Web Socket.");  
+     function onopen(event) {  
+         getTextAreaElement().value = "Web Socket opened!";  
+     	}  
+     function onmessage(event) {  
+         appendTextArea(event.data);  
+     	}	  
+     function onclose(event) {  
+         appendTextArea("Web Socket closed");  
+     	}  
+
+     function appendTextArea(newData) {  
+         var el = getTextAreaElement();  
+         el.value = el.value + '\n' + newData;  
+     	}  
+
+     function getTextAreaElement() {  
+         return document.getElementById('responseText');  
+     	}  
+
+     function send(event) {  
+         event.preventDefault();  
+         if (window.WebSocket) {  
+			     if (socket.readyState == WebSocket.OPEN)
+			         socket.send(event.target.message.value);  
+			     else 
+			         alert("The socket is not open.");  
+         		}  
+     	}  
+     document.forms.inputform.addEventListener('submit', send, false);  
+        }  
+    window.addEventListener('load', function() {new Sock();}, false);  
+    $("#btnGet").click( function () {  
+     $.get("http://localhost:8080/", { q: "John"},  
+     function(data){  
+    	 	$("#responseTextGet").val($("#responseTextGet").val() + data)  
+     		});  
+    	});  
+		$("#btnPost").click( function () {  
+			$.post("http://localhost:8080/", { q: "John"},  
+			function(data){  
+				$("#responseTextPost").val($("#responseTextGet").val() + data)  
+			});  
+        });  
+    });   
 }

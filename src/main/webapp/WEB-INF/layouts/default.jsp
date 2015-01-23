@@ -32,7 +32,7 @@
 <script src="${ctx}/static/tool/messenger/js/messenger.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/constructor.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/BaseClass.js" ></script>
-<script type="text/javascript" src="${ctx}/static/tool/oop/class/Sysutil.js?2015.01.05" ></script>
+<script type="text/javascript" src="${ctx}/static/tool/oop/class/Sysutil.js" ></script>
 <script type="text/javascript" src="${ctx}/static/js/tool.js" ></script>
 <script type="text/javascript">
 	var sysutil = New(Sysutil,[]);
@@ -42,6 +42,19 @@
 		  extraClasses: 'messenger-fixed messenger-theme-future messenger-on-top'
 		}
 </script>
+<style type="text/css">
+	body {
+		width:100%
+	}
+	.container{
+		max-width:100%;
+		padding-left:0px;
+		padding-right:0px;
+	}
+	#content{
+		padding: 5px 15px 5px 15px;
+	}
+</style>
 <sitemesh:head/>
 </head>
 <body>

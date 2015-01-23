@@ -20,6 +20,7 @@ import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Encodes;
 
 import com.usermanager.base.service.ShiroManager;
+import com.usermanager.user.ajax.UserVo;
 import com.usermanager.user.entity.User;
 import com.usermanager.user.repository.UserDao;
 import com.util.DateUtil;
@@ -68,6 +69,28 @@ public class AccountService {
 		userDao.save(user);
 	}
 
+	public User checkUserLoginName(String loginName) {
+		return userDao.findByLoginName(loginName);
+	}
+
+	public int createUser(UserVo vo) {
+		if (vo == null) {
+			return 0;
+		}
+		User checkUserLoginName = checkUserLoginName(vo.getLoginName());
+		if (checkUserLoginName != null)
+			return 0;
+		User user = new User();
+		user.setLoginName(vo.getLoginName());
+		user.setName(vo.getName());
+		user.setPlainPassword(vo.getPassword());
+		user.setRegisterDate(DateUtil.getNowTimestamp());
+		user.setEmail(vo.getEmail().toCharArray());
+		entryptPassword(user);
+		userDao.save(user);
+		return 1;
+	}
+
 	public int enitUserInfo(long id, String name, String loginName) {
 		if (id <= 0)
 			return 0;
@@ -106,7 +129,8 @@ public class AccountService {
 				map.put("id", user.getId());
 				map.put("loginName", user.getLoginName());
 				map.put("name", user.getName());
-				map.put("registerDate", user.getRegisterDate().toString());
+				map.put("registerDate", user.getRegisterDate() == null ? "" : String.valueOf(user.getRegisterDate()));
+				map.put("email", user.getEmail() == null ? "" : String.valueOf(user.getEmail()));
 				list.add(map);
 			}
 		}

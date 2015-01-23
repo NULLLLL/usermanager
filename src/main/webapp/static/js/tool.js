@@ -12,6 +12,7 @@ tool.alert = function (message){
 	var msg = $.globalMessenger().post({
 		message: message,
 		type: 'info',
-		showCloseButton: true
+		showCloseButton: true,
+		hideAfter: 3
 	});
 };

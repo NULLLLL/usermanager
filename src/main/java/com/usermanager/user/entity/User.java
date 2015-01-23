@@ -27,6 +27,7 @@ public class User extends IdEntity {
 	private String password;
 	private String salt;
 	private Date registerDate;
+	private char[] email;
 
 	public User() {
 	}
@@ -93,6 +94,14 @@ public class User extends IdEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	public char[] getEmail() {
+		return email;
+	}
+
+	public void setEmail(char[] email) {
+		this.email = email;
 	}
 
 }
