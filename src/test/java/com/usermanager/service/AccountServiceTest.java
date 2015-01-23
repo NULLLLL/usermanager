@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ public class AccountServiceTest extends BaseTest {
 	@Autowired
 	private AccountService accountService;
 
+	@Ignore
 	@Test
 	public void delUser() {
 		List<User> allUser = accountService.getAllUser();
@@ -32,6 +34,7 @@ public class AccountServiceTest extends BaseTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public void createUser() {
 		List<Integer> list = new ArrayList<Integer>();

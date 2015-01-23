@@ -20,14 +20,17 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.modules.utils.Encodes;
 
 import com.google.common.base.Objects;
 import com.usermanager.user.entity.User;
 import com.usermanager.user.service.AccountService;
+import com.usermanager.user.service.AccountServiceImpl;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
+	@Autowired
 	protected AccountService accountService;
 
 	/**
@@ -62,13 +65,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	 */
 	@PostConstruct
 	public void initCredentialsMatcher() {
-		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(AccountService.HASH_ALGORITHM);
-		matcher.setHashIterations(AccountService.HASH_INTERATIONS);
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(AccountServiceImpl.HASH_ALGORITHM);
+		matcher.setHashIterations(AccountServiceImpl.HASH_INTERATIONS);
 		setCredentialsMatcher(matcher);
-	}
-
-	public void setAccountService(AccountService accountService) {
-		this.accountService = accountService;
 	}
 
 	/**
@@ -152,4 +151,5 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		}
 
 	}
+
 }

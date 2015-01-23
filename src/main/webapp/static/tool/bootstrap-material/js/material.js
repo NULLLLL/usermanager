@@ -76,7 +76,7 @@
         // Add floating label if required
         if ($this.hasClass("floating-label")) {
 					var placeholder = $this.attr("placeholder");
-					focused = setInterval(function() {clearInterval(focused);}, 1);
+					focused = setInterval(function() {clearInterval(focused);}, 10);
 					$this.attr("placeholder", null).removeClass("floating-label");
 					$this.after("<div class=floating-label>" + placeholder + "</div>");
         }
